@@ -29,6 +29,16 @@ class BowlingGameTest {
         assertEquals(12, game.score())
     }
 
+    @Test
+    fun shouldCorrectlyCountStrike() {
+        game.roll(10) // strike
+        game.roll(2)
+        game.roll(2)
+        rollNPinsTimes(0, 16)
+
+        assertEquals(18, game.score())
+    }
+
     private fun rollSpare() {
         rollNPinsTimes(5,2)
     }
@@ -52,7 +62,10 @@ class BowlingGame {
     fun score(): Int {
         var firstInFrame = 0
         (1..10).forEach {
-            if (isSpare(firstInFrame)) {
+            if (rolls[firstInFrame] == 10){
+                score += 10 + rolls[firstInFrame + 1] + rolls[firstInFrame + 2]
+                firstInFrame += 1
+            } else if (isSpare(firstInFrame)) {
                 score += 10 + countSpareBonusScore(firstInFrame)
                 firstInFrame += 2
             } else {
