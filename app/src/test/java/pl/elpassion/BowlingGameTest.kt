@@ -8,10 +8,14 @@ class BowlingGameTest {
     @Test
     fun shouldReturnScoreEqualsZeroIfPlayerHasNotKnockedAnyPin() {
         val game = BowlingGame()
+        rollZeroTwentyTimes(game)
+        assertEquals(0, game.score())
+    }
+
+    private fun rollZeroTwentyTimes(game: BowlingGame) {
         (1..20).forEach {
             game.roll(0)
         }
-        assertEquals(0, game.score())
     }
 }
 
