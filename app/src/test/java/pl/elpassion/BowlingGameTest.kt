@@ -10,30 +10,31 @@ class BowlingGameTest {
 
     @Test
     fun shouldReturnScoreEqualsZeroIfPlayerHasNotKnockedAnyPin() {
-        rollNPinsTwentyTimes(0)
+        rollNPinsTimes(0, 20)
         assertEquals(0, game.score())
     }
 
     @Test
     fun shouldReturnScoreEquals20IfPlayerHasKnockedOnePinInEveryThrow() {
-        rollNPinsTwentyTimes(1)
+        rollNPinsTimes(1, 20)
         assertEquals(20, game.score())
     }
 
     @Test
     fun shouldCorrectlyCountSpare() {
-        game.roll(5)
-        game.roll(5) // spare
+        rollSpare()
         game.roll(1)
-        (1..17).forEach {
-            game.roll(0)
-        }
+        rollNPinsTimes(0, 17)
 
         assertEquals(12, game.score())
     }
 
-    private fun rollNPinsTwentyTimes(pins: Int) {
-        (1..20).forEach {
+    private fun rollSpare() {
+        rollNPinsTimes(5,2)
+    }
+
+    private fun rollNPinsTimes(pins: Int, times: Int) {
+        (1..times).forEach {
             game.roll(pins)
         }
     }
