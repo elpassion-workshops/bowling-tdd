@@ -5,25 +5,23 @@ import org.junit.Test
 
 class BowlingGameTest {
 
+    val game = BowlingGame()
+
     @Test
     fun shouldReturnScoreEqualsZeroIfPlayerHasNotKnockedAnyPin() {
-        val game = BowlingGame()
-        rollZeroTwentyTimes(game)
+        rollNPinsTwentyTimes(0)
         assertEquals(0, game.score())
     }
 
     @Test
     fun shouldReturnScoreEquals20IfPlayerHasKnockedOnePinInEveryThrow() {
-        val game = BowlingGame()
-        (1..20).forEach {
-            game.roll(1)
-        }
+        rollNPinsTwentyTimes(1)
         assertEquals(20, game.score())
     }
 
-    private fun rollZeroTwentyTimes(game: BowlingGame) {
+    private fun rollNPinsTwentyTimes(pins: Int) {
         (1..20).forEach {
-            game.roll(0)
+            game.roll(pins)
         }
     }
 }
