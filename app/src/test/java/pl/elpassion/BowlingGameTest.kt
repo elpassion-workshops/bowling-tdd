@@ -66,8 +66,8 @@ class BowlingGame {
     fun score(): Int {
         var firstInFrame = 0
         (1..10).forEach {
-            if (rolls[firstInFrame] == 10){
-                score += 10 + rolls[firstInFrame + 1] + rolls[firstInFrame + 2]
+            if (isStrike(firstInFrame)){
+                score += 10 + countStrikeBonusScore(firstInFrame)
                 firstInFrame += 1
             } else if (isSpare(firstInFrame)) {
                 score += 10 + countSpareBonusScore(firstInFrame)
@@ -80,10 +80,14 @@ class BowlingGame {
         return score
     }
 
+    private fun isStrike(firstInFrame: Int) = rolls[firstInFrame] == 10
+
+    private fun countStrikeBonusScore(firstInFrame: Int) = rolls[firstInFrame + 1] + rolls[firstInFrame + 2]
+
+    private fun isSpare(firstInFrame: Int) = rolls[firstInFrame] + rolls[firstInFrame + 1] == 10
+
     private fun countSpareBonusScore(firstInFrame: Int) = rolls[firstInFrame + 2]
 
     private fun countNormalFrameScore(firstInFrame: Int) = rolls[firstInFrame] + rolls[firstInFrame + 1]
-
-    private fun isSpare(firstInFrame: Int) = rolls[firstInFrame] + rolls[firstInFrame + 1] == 10
 
 }
