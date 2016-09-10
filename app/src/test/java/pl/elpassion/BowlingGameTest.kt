@@ -31,12 +31,16 @@ class BowlingGameTest {
 
     @Test
     fun shouldCorrectlyCountStrike() {
-        game.roll(10) // strike
+        rollStrike()
         game.roll(2)
         game.roll(2)
         rollNPinsTimes(0, 16)
 
         assertEquals(18, game.score())
+    }
+
+    private fun rollStrike() {
+        game.roll(10)
     }
 
     private fun rollSpare() {
